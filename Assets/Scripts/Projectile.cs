@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour {
     protected GameObject projectile;
-    protected SpringJoint2D springJoint;
     protected Rigidbody2D rb;
     protected Rigidbody2D anchor;
+    protected SpringJoint2D springJoint;
+    protected CameraController mainCamera;
 
     protected bool isHold = false;
     protected float releaseTime = 0.1f;
@@ -18,8 +19,9 @@ public class Projectile : MonoBehaviour {
     protected void Start() {
         projectile = GameObject.Find("Projectile");
         anchor = GameObject.Find("Anchor").GetComponent<Rigidbody2D>();
-        springJoint = projectile.gameObject.GetComponent<SpringJoint2D>();
         rb = projectile.gameObject.GetComponent<Rigidbody2D>();
+        springJoint = projectile.gameObject.GetComponent<SpringJoint2D>();
+        mainCamera = Camera.main.GetComponent<CameraController>();
     }
 
     protected void Update() {
@@ -28,7 +30,6 @@ public class Projectile : MonoBehaviour {
 
     // Drag projectile when holding down mousebutton
     protected void OnMouseDown() {
-        Debug.Log("mouse down");
         isHold = true;
         // Make it kinematic otherwise the anchor will pull it back
         rb.isKinematic = true;
@@ -36,10 +37,10 @@ public class Projectile : MonoBehaviour {
 
     // Release the projectile and remove the anchor
     protected void OnMouseUp() {
-        Debug.Log("mouse up");
         isHold = false;
         rb.isKinematic = false;
         StartCoroutine(RemoveAnchor());
+        mainCamera.CameraFocus = this.gameObject;
     }
 
     protected void DragProjectile() {
