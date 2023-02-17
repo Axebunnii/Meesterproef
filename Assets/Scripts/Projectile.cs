@@ -14,6 +14,10 @@ public class Projectile : MonoBehaviour {
     protected int maxDragDis = 2;
     protected float distance;
 
+    protected bool draggable = true;
+    protected bool hitGround = false;
+    protected float velocity;
+
     protected int damage;
 
     protected void Start() {
@@ -25,7 +29,22 @@ public class Projectile : MonoBehaviour {
     }
 
     protected void Update() {
-        DragProjectile();
+        if (draggable) {
+            DragProjectile();
+        }
+        if (hitGround) {
+            DecreaseVelocity(velocity);
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision) {
+        //if collide with ground decrease velocity
+        Debug.Log(collision.gameObject.name);
+        if (collision.gameObject.name == "Ground") {
+            velocity = collision.relativeVelocity.magnitude;
+            hitGround = true;
+            Debug.Log(hitGround);
+        }
     }
 
     // Drag projectile when holding down mousebutton
@@ -63,6 +82,12 @@ public class Projectile : MonoBehaviour {
     protected IEnumerator RemoveAnchor() {
         yield return new WaitForSeconds(releaseTime);
         springJoint.enabled = false;
-        this.enabled = false;
+        draggable = false;
+        //this.enabled = false;
+    }
+
+    protected void DecreaseVelocity(float vel) {
+        Debug.Log(Time.deltaTime);
+        //this.gameObject.GetComponent<Rigidbody2D>().velocity = (vel/Time.deltaTime);
     }
 }
