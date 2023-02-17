@@ -20,6 +20,9 @@ public class CameraController : MonoBehaviour {
         if (cameraFocus.transform.position.x > 4) {
             position.x = (cameraFocus.transform.position - offset).x;
             transform.position = position;
+        } else if (cameraFocus.transform.position.x > 4) {
+            position.x = (cameraFocus.transform.position - offset).x;
+            transform.position = position;
         }
     }
 }
