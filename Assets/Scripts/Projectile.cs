@@ -9,6 +9,11 @@ public class Projectile : MonoBehaviour {
     protected SpringJoint2D springJoint;
     protected CameraController mainCamera;
 
+    protected bool canShoot;
+    public bool CanShoot {
+        get { return canShoot; }
+        set { canShoot = value; }
+    }
     protected bool isHold = false;
     protected float releaseTime = 0.1f;
     protected int maxDragDis = 2;
@@ -29,7 +34,7 @@ public class Projectile : MonoBehaviour {
     }
 
     protected void Update() {
-        if (draggable) {
+        if (draggable && canShoot) {
             DragProjectile();
         }
         if (hitGround) {
@@ -49,6 +54,9 @@ public class Projectile : MonoBehaviour {
 
     // Drag projectile when holding down mousebutton
     protected void OnMouseDown() {
+        if (!canShoot) {
+            return;
+        }
         isHold = true;
         // Make it kinematic otherwise the anchor will pull it back
         rb.isKinematic = true;
@@ -56,9 +64,12 @@ public class Projectile : MonoBehaviour {
 
     // Release the projectile and remove the anchor
     protected void OnMouseUp() {
+        if (!canShoot) {
+            return;
+        }
         isHold = false;
         rb.isKinematic = false;
-        StartCoroutine(RemoveAnchor());
+        StartCoroutine(ReleaseProjectile());
         mainCamera.CameraFocus = this.gameObject;
     }
 
@@ -79,15 +90,19 @@ public class Projectile : MonoBehaviour {
         return Vector2.Distance(mousePos, anchor.position);
     }
 
-    protected IEnumerator RemoveAnchor() {
+    protected IEnumerator ReleaseProjectile() {
         yield return new WaitForSeconds(releaseTime);
+        // Remove the anchor its attached to
         springJoint.enabled = false;
         draggable = false;
         //this.enabled = false;
+
+        // Set the rigidbody rotation constraints to false
+        rb.constraints = RigidbodyConstraints2D.None;
     }
 
     protected void DecreaseVelocity(float vel) {
-        Debug.Log(Time.deltaTime);
+        //Debug.Log(Time.deltaTime);
         //this.gameObject.GetComponent<Rigidbody2D>().velocity = (vel/Time.deltaTime);
     }
 }
