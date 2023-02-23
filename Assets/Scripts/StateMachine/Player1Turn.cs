@@ -7,18 +7,18 @@ public class Player1Turn : State {
 
     public override void Enter() {
         Debug.Log("start player 1 turn");
-        //Exit();
+        currentPhase = Phase.PhaseStatus.draw;
+        phase = new Phase();
         Update();
     }
 
     public override void Update() {
-        phase = new Phase();
-        if (phase.CurrentPhase == "Draw") {
-            phase.Draw();
-        } else if (phase.CurrentPhase == "Play Card") {
-            phase.PlayCard();
-            phase.CurrentPhase = "Play Card";
-        } else if (phase.CurrentPhase == "Shoot") {
+        Debug.Log($"current phase: {currentPhase}");
+        if (currentPhase == Phase.PhaseStatus.draw) {
+            phase.EnterDraw(this);
+        } else if (currentPhase == Phase.PhaseStatus.card) {
+            phase.PlayCard(this);
+        } else if (currentPhase == Phase.PhaseStatus.shoot) {
             phase.Shoot();
         }
     }

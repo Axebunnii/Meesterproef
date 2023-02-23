@@ -8,6 +8,11 @@ public class State{
     protected Phase phase;
     protected Projectile projectile;
     protected MonoBehaviour monoBehaviour;
+    protected Phase.PhaseStatus currentPhase;
+    public Phase.PhaseStatus CurrentPhase {
+        get { return currentPhase; }
+        set { currentPhase = value; }
+    }
 
     public State(string name, StateManager stateMachine) {
         this.name = name;
