@@ -4,29 +4,45 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour {
     private Vector3 offset = new Vector2(4, 0);
-    private GameObject cameraFocus;
-    public GameObject CameraFocus {
-        get { return cameraFocus; }
-        set { cameraFocus = value; }
-    }
-    [SerializeField] private GameObject playerOneFocus;
+    public enum CameraFocus {player1, player2, projectile};
+    public CameraFocus currentFocus;
+    /*private GameObject currentFocus;
+    public GameObject CurrentFocus {
+        get { return currentFocus; }
+        set { currentFocus = value; }
+    }*/
+    // Focus objects
+    private GameObject focusPlayer1;
+    private GameObject focusPlayer2;
+    private GameObject focusProjectile;
 
     private void Start() {
-        cameraFocus = playerOneFocus;
+        focusPlayer1 = GameObject.Find("Player1FocusPoint");
+        focusPlayer2 = GameObject.Find("Player2FocusPoint");
+        focusProjectile = GameObject.Find("Projectile");
+        currentFocus = CameraFocus.player1;
     }
 
     private void Update() {
-        Vector3 position = transform.position;
-        if (cameraFocus.transform.position.x > 4) {
-            position.x = (cameraFocus.transform.position - offset).x;
-            transform.position = position;
-        } else if (cameraFocus.transform.position.x > 4) {
-            position.x = (cameraFocus.transform.position - offset).x;
-            transform.position = position;
-        }
+        if (currentFocus == CameraFocus.player1) { FocusOnPlayer(focusPlayer1); }
+        else if (currentFocus == CameraFocus.player2) { FocusOnPlayer(focusPlayer2); }
+        else if (currentFocus == CameraFocus.projectile) { FollowProjectile(); }
     }
 
-    private void SetFocus() {
+    private void FocusOnPlayer(GameObject player) {
+        this.transform.position = player.transform.position;
+    }
 
+    private void FollowProjectile() {
+        Vector3 position = transform.position;
+
+        if (focusProjectile.transform.position.x > 4) {
+            position.x = (focusProjectile.transform.position - offset).x;
+            transform.position = position;
+        }
+        else if (focusProjectile.transform.position.x > 4) {
+            position.x = (focusProjectile.transform.position - offset).x;
+            transform.position = position;
+        }
     }
 }
