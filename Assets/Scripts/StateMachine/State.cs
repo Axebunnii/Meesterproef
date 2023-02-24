@@ -8,6 +8,7 @@ public class State{
     protected Phase phase;
     protected Projectile projectile;
     protected MonoBehaviour monoBehaviour;
+    protected CameraController cameraController = Camera.main.GetComponent<CameraController>();
     protected Phase.PhaseStatus currentPhase;
     public Phase.PhaseStatus CurrentPhase {
         get { return currentPhase; }

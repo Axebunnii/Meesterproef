@@ -3,22 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class StateManager : MonoBehaviour {
-    State currentState;
+    public enum StateStatus {player1, player2, end};
+    private State currentState;
+    public State CurrentState {
+        set { currentState = value; }
+        get { return currentState; }
+    }
 
     void Start() {
         currentState = new Player1Turn(this);
         RunCurrentState();
     }
-
-    /*void Update() {
-        if (currentState != null)
-            currentState.UpdateLogic();
-    }
-
-    void LateUpdate() {
-        if (currentState != null)
-            currentState.UpdatePhysics();
-    }*/
 
     private void RunCurrentState() {
         Debug.Log("run state");
@@ -29,7 +24,6 @@ public class StateManager : MonoBehaviour {
     public void ChangeState(State newState) {
         // Exit the last state and enter the new one
         Debug.Log($"current state is {currentState}");
-        currentState.Exit();
         currentState = newState;
         currentState.Enter();
     }
