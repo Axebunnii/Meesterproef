@@ -8,6 +8,7 @@ public class Projectile : MonoBehaviour {
     protected Rigidbody2D anchor;
     protected SpringJoint2D springJoint;
     protected CameraController mainCamera;
+    protected StateManager stateManager;
 
     protected bool canShoot;
     public bool CanShoot {
@@ -31,6 +32,7 @@ public class Projectile : MonoBehaviour {
         rb = projectile.gameObject.GetComponent<Rigidbody2D>();
         springJoint = projectile.gameObject.GetComponent<SpringJoint2D>();
         mainCamera = Camera.main.GetComponent<CameraController>();
+        stateManager = GameObject.Find("StateManager").GetComponent<StateManager>();
     }
 
     protected void Update() {
@@ -50,6 +52,9 @@ public class Projectile : MonoBehaviour {
             hitGround = true;
             Debug.Log(hitGround);
         }
+
+        // Delete projectile in 10 seconds after it hit something
+        StartCoroutine(DeleteProjectile());
     }
 
     // Drag projectile when holding down mousebutton
@@ -104,5 +109,11 @@ public class Projectile : MonoBehaviour {
     protected void DecreaseVelocity(float vel) {
         //Debug.Log(Time.deltaTime);
         //this.gameObject.GetComponent<Rigidbody2D>().velocity = (vel/Time.deltaTime);
+    }
+
+    protected IEnumerator DeleteProjectile() {
+        yield return new WaitForSeconds(10);
+        stateManager.CurrentState.Exit();
+        Destroy(this.gameObject);
     }
 }

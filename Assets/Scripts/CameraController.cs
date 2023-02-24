@@ -26,7 +26,7 @@ public class CameraController : MonoBehaviour {
         }
     }
 
-    private void SetFocusPoint() {
+    private void SetFocus() {
 
     }
 }
