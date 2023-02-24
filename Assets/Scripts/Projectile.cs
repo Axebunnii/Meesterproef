@@ -75,7 +75,7 @@ public class Projectile : MonoBehaviour {
         isHold = false;
         rb.isKinematic = false;
         StartCoroutine(ReleaseProjectile());
-        mainCamera.CameraFocus = this.gameObject;
+        mainCamera.currentFocus = CameraController.CameraFocus.projectile;
     }
 
     protected void DragProjectile() {

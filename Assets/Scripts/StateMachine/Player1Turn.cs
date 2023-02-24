@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Player1Turn : State {
-    private readonly GameObject focusPoint = GameObject.Find("Player1FocusPoint");
-
     public Player1Turn(StateManager worldState) : base("Player1Turn", worldState) { stateMachine = worldState; }
 
     public override void Enter() {
         Debug.Log("start player 1 turn");
-        cameraController.CameraFocus = focusPoint;
+        cameraController.currentFocus = CameraController.CameraFocus.player1;
         currentPhase = Phase.PhaseStatus.draw;
         phase = new Phase();
         Update();
