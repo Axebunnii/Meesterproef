@@ -10,10 +10,11 @@ public class Phase{
         set { PhaseStatus = value; }
     }*/
 
-    private readonly Projectile projectile = GameObject.Find("Projectile").GetComponent<Projectile>();
+    private Projectile projectile;
 
     public void EnterDraw(State state) {
         Debug.Log("draw card");
+        projectile = GameObject.FindGameObjectWithTag("Projectile").GetComponent<Projectile>();
         projectile.CanShoot = false;
         // Wait till card has been drawn from the deck
         MonoInstance.instance.StartCoroutine(WaitForCardDrawn(state));
@@ -31,6 +32,7 @@ public class Phase{
 
     public void Shoot() {
         Debug.Log("shoot");
+        projectile = GameObject.FindGameObjectWithTag("Projectile").GetComponent<Projectile>();
         // Player is able to shoot
         projectile.CanShoot = true;
     }
@@ -39,7 +41,6 @@ public class Phase{
         while (!Input.GetKeyDown(KeyCode.Space)) {
             yield return null;
         }
-        Debug.Log("Key pressed: Space");
         state.CurrentPhase = PhaseStatus.card;
         MonoInstance.instance.StopCoroutine(WaitForCardDrawn(state));
         ExitDraw(state);
@@ -49,7 +50,6 @@ public class Phase{
         while (!Input.GetKeyDown(KeyCode.A)) {
             yield return null;
         }
-        Debug.Log("Key pressed: A");
         state.CurrentPhase = PhaseStatus.shoot;
         // Activate card effect
 

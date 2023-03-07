@@ -19,7 +19,6 @@ public class CameraController : MonoBehaviour {
     private void Start() {
         focusPlayer1 = GameObject.Find("Player1FocusPoint");
         focusPlayer2 = GameObject.Find("Player2FocusPoint");
-        focusProjectile = GameObject.Find("Projectile");
         currentFocus = CameraFocus.player1;
     }
 
@@ -34,6 +33,7 @@ public class CameraController : MonoBehaviour {
     }
 
     private void FollowProjectile() {
+        focusProjectile = GameObject.FindGameObjectWithTag("Projectile");
         Vector3 position = transform.position;
 
         if (focusProjectile.transform.position.x > 4) {

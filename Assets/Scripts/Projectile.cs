@@ -15,6 +15,7 @@ public class Projectile : MonoBehaviour {
         get { return canShoot; }
         set { canShoot = value; }
     }
+
     protected bool isHold = false;
     protected float releaseTime = 0.1f;
     protected int maxDragDis = 2;
@@ -24,11 +25,19 @@ public class Projectile : MonoBehaviour {
     protected bool hitGround = false;
     protected float velocity;
 
+    [SerializeField] protected StateManager.StateStatus state;
+    public StateManager.StateStatus State {
+        set { state = value; }
+        get { return state; }
+    }
+
+    [SerializeField] protected bool assignAnchor = false;
+
     protected int damage;
 
     protected void Start() {
-        projectile = GameObject.Find("Projectile");
-        anchor = GameObject.Find("Anchor").GetComponent<Rigidbody2D>();
+        assignAnchor = false;
+        projectile = this.gameObject;
         rb = projectile.gameObject.GetComponent<Rigidbody2D>();
         springJoint = projectile.gameObject.GetComponent<SpringJoint2D>();
         mainCamera = Camera.main.GetComponent<CameraController>();
@@ -50,7 +59,6 @@ public class Projectile : MonoBehaviour {
         if (collision.gameObject.name == "Ground") {
             velocity = collision.relativeVelocity.magnitude;
             hitGround = true;
-            Debug.Log(hitGround);
         }
 
         // Delete projectile in 10 seconds after it hit something
@@ -79,11 +87,19 @@ public class Projectile : MonoBehaviour {
     }
 
     protected void DragProjectile() {
+        if (!assignAnchor) {
+            if (state == StateManager.StateStatus.player1) anchor = GameObject.Find("AnchorP1").GetComponent<Rigidbody2D>();
+            else if (state == StateManager.StateStatus.player2) anchor = GameObject.Find("AnchorP2").GetComponent<Rigidbody2D>();
+            assignAnchor = true;
+        }
+
         if (isHold) {
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             distance = GetDistance(mousePos);
             if (distance > maxDragDis) {
                 // Add the vector pointing from the hook position to the mouse position with the lenght of the max drag distance to the anchor position
+                Debug.Log(rb.position);
+                Debug.Log(anchor);
                 rb.position = anchor.position + (mousePos - anchor.position).normalized * maxDragDis;
             } else {
                 rb.position = mousePos;
@@ -102,7 +118,7 @@ public class Projectile : MonoBehaviour {
         draggable = false;
         //this.enabled = false;
 
-        // Set the rigidbody rotation constraints to false
+        // Remove rotation constraints
         rb.constraints = RigidbodyConstraints2D.None;
     }
 
@@ -112,7 +128,7 @@ public class Projectile : MonoBehaviour {
     }
 
     protected IEnumerator DeleteProjectile() {
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(5);
         stateManager.CurrentState.Exit();
         Destroy(this.gameObject);
     }
