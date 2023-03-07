@@ -20,7 +20,7 @@ public class Player : MonoBehaviour {
     private void OnCollisionEnter2D(Collision2D collision) {
         Debug.Log($"Colliding with {collision.gameObject.name}");
         Debug.Log($"Collide velocity is {collision.relativeVelocity.magnitude}");
-        if (collision.gameObject.name == "Projectile" && collision.relativeVelocity.magnitude > 15) {
+        if (collision.gameObject.tag == "Projectile" && collision.relativeVelocity.magnitude > 15) {
             Debug.Log($"Damage {this.gameObject.name}");
             GetDamage(110);
         }

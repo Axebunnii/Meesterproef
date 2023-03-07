@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class StateManager : MonoBehaviour {
-    public enum StateStatus {player1, player2, end};
+    public enum StateStatus { player1, player2, end };
     private State currentState;
     public State CurrentState {
         set { currentState = value; }

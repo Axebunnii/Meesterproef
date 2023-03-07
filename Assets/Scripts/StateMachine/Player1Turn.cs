@@ -10,6 +10,16 @@ public class Player1Turn : State {
         cameraController.currentFocus = CameraController.CameraFocus.player1;
         currentPhase = Phase.PhaseStatus.draw;
         phase = new Phase();
+        // Create a new stone at the start of the turn
+        GameObject prefab = Resources.Load("Projectiles/Stone") as GameObject;
+        GameObject anchor = GameObject.Find("AnchorP1");
+        // Make a new stone and attach it to player 1 anchor
+        GameObject ins = Object.Instantiate(prefab, anchor.transform.position, Quaternion.identity);
+        ins.GetComponent<SpringJoint2D>().connectedBody = anchor.GetComponent<Rigidbody2D>();
+        projectile = GameObject.FindGameObjectWithTag("Projectile").GetComponent<Projectile>();
+        projectile.State = StateManager.StateStatus.player1;
+        Debug.Log($"State: {projectile.State}");
+
         Update();
     }
 
