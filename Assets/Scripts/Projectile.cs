@@ -25,11 +25,11 @@ public class Projectile : MonoBehaviour {
     protected bool hitGround = false;
     protected float velocity;
 
-    [SerializeField] protected StateManager.StateStatus state;
+    /*[SerializeField] protected StateManager.StateStatus state;
     public StateManager.StateStatus State {
         set { state = value; }
         get { return state; }
-    }
+    }*/
 
     [SerializeField] protected bool assignAnchor = false;
 
@@ -55,7 +55,6 @@ public class Projectile : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision) {
         //if collide with ground decrease velocity
-        Debug.Log(collision.gameObject.name);
         if (collision.gameObject.name == "Ground") {
             velocity = collision.relativeVelocity.magnitude;
             hitGround = true;
@@ -88,8 +87,8 @@ public class Projectile : MonoBehaviour {
 
     protected void DragProjectile() {
         if (!assignAnchor) {
-            if (state == StateManager.StateStatus.player1) anchor = GameObject.Find("AnchorP1").GetComponent<Rigidbody2D>();
-            else if (state == StateManager.StateStatus.player2) anchor = GameObject.Find("AnchorP2").GetComponent<Rigidbody2D>();
+            if (stateManager.State == StateManager.StateStatus.player1) anchor = GameObject.Find("AnchorP1").GetComponent<Rigidbody2D>();
+            else if (stateManager.State == StateManager.StateStatus.player2) anchor = GameObject.Find("AnchorP2").GetComponent<Rigidbody2D>();
             assignAnchor = true;
         }
 
@@ -98,8 +97,6 @@ public class Projectile : MonoBehaviour {
             distance = GetDistance(mousePos);
             if (distance > maxDragDis) {
                 // Add the vector pointing from the hook position to the mouse position with the lenght of the max drag distance to the anchor position
-                Debug.Log(rb.position);
-                Debug.Log(anchor);
                 rb.position = anchor.position + (mousePos - anchor.position).normalized * maxDragDis;
             } else {
                 rb.position = mousePos;

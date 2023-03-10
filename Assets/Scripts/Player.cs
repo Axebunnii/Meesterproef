@@ -10,7 +10,22 @@ public class Player : MonoBehaviour {
     private int CurrentLP {
         get { return currentLP; }
     }
-    private int maxLP = 1000;    
+    private int maxLP = 1000;
+    // Deck is made of 10x TripleShot cards and 10x Bomb cards
+    private List<Card> deck = new List<Card> { new Bomb(), new Bomb(), new Bomb(), new Bomb(), new Bomb(),
+        new Bomb(), new Bomb(), new Bomb(),new Bomb(), new Bomb(), new TripleShot(), new TripleShot(), new TripleShot(),
+        new TripleShot(), new TripleShot(), new TripleShot(), new TripleShot(), new TripleShot(), new TripleShot(), new TripleShot()};
+
+    public List<Card> Deck {
+        get { return deck; }
+    }
+
+    // Cards in the players hand
+    private List<Card> hand = new List<Card>();
+    public List<Card> Hand {
+        get { return hand; }
+        set { hand = value; }
+    }
 
     private void Start() {
         currentLP = maxLP;
@@ -18,10 +33,8 @@ public class Player : MonoBehaviour {
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {
-        Debug.Log($"Colliding with {collision.gameObject.name}");
         Debug.Log($"Collide velocity is {collision.relativeVelocity.magnitude}");
         if (collision.gameObject.tag == "Projectile" && collision.relativeVelocity.magnitude > 15) {
-            Debug.Log($"Damage {this.gameObject.name}");
             GetDamage(110);
         }
     }

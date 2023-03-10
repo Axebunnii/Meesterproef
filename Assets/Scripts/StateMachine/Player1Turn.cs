@@ -17,8 +17,7 @@ public class Player1Turn : State {
         GameObject ins = Object.Instantiate(prefab, anchor.transform.position, Quaternion.identity);
         ins.GetComponent<SpringJoint2D>().connectedBody = anchor.GetComponent<Rigidbody2D>();
         projectile = GameObject.FindGameObjectWithTag("Projectile").GetComponent<Projectile>();
-        projectile.State = StateManager.StateStatus.player1;
-        Debug.Log($"State: {projectile.State}");
+        stateMachine.State = StateManager.StateStatus.player1;
 
         Update();
     }
