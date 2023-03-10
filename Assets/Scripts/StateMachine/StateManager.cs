@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class StateManager : MonoBehaviour {
     public enum StateStatus { player1, player2, end };
+    protected StateStatus state;
+    public StateStatus State {
+        set { state = value; }
+        get { return state; }
+    }
+
     private State currentState;
     public State CurrentState {
         set { currentState = value; }

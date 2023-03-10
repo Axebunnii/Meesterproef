@@ -2,18 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Phase{
+public class Phase {
     // 1. draw phase    2. card phase   3.shoot phase
     public enum PhaseStatus {draw, card, shoot};
-    /*public enum CurrentPhase {
-        get { return PhaseStatus; }
-        set { PhaseStatus = value; }
-    }*/
-
     private Projectile projectile;
+    private Player player;
+    private StateManager stateManager;
 
     public void EnterDraw(State state) {
         Debug.Log("draw card");
+        stateManager = GameObject.Find("StateManager").GetComponent<StateManager>();
+        if (stateManager.State == StateManager.StateStatus.player1) { player = GameObject.Find("Player1").GetComponent<Player>(); }
+        else if (stateManager.State == StateManager.StateStatus.player2) { player = GameObject.Find("Player2").GetComponent<Player>(); }
+        Debug.Log(player);
         projectile = GameObject.FindGameObjectWithTag("Projectile").GetComponent<Projectile>();
         projectile.CanShoot = false;
         // Wait till card has been drawn from the deck
@@ -21,17 +22,14 @@ public class Phase{
     }
 
     private void ExitDraw(State state) {
-        Debug.Log("call state update");
         state.Update();
     }
 
     public void PlayCard(State state) {
-        Debug.Log("play card");
         MonoInstance.instance.StartCoroutine(WaitForCardPlayed(state));
     }
 
     public void Shoot() {
-        Debug.Log("shoot");
         projectile = GameObject.FindGameObjectWithTag("Projectile").GetComponent<Projectile>();
         // Player is able to shoot
         projectile.CanShoot = true;
@@ -41,6 +39,19 @@ public class Phase{
         while (!Input.GetKeyDown(KeyCode.Space)) {
             yield return null;
         }
+        // Draw card
+        if (player.Deck.Count < 1) {
+            // Player losses game
+
+            yield return null;
+        }
+        // Draw random card
+        int randomNumber = Random.Range(0, player.Deck.Count - 1);
+        Card drawnCard = player.Deck[randomNumber];
+        player.Hand.Add(drawnCard);
+        Debug.Log($"Draw {drawnCard}");
+        Debug.Log($"Player has {player.Hand.Count} cards in hand");
+
         state.CurrentPhase = PhaseStatus.card;
         MonoInstance.instance.StopCoroutine(WaitForCardDrawn(state));
         ExitDraw(state);
