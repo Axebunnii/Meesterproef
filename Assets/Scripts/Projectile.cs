@@ -41,7 +41,7 @@ public class Projectile : MonoBehaviour {
         rb = projectile.gameObject.GetComponent<Rigidbody2D>();
         springJoint = projectile.gameObject.GetComponent<SpringJoint2D>();
         mainCamera = Camera.main.GetComponent<CameraController>();
-        stateManager = GameObject.Find("StateManager").GetComponent<StateManager>();
+        stateManager = GameObject.Find("GameManager").GetComponent<StateManager>();
     }
 
     protected void Update() {

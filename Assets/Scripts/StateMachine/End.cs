@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class End : State {
-    public End(StateManager worldState) : base("End", worldState) { }
+    public End(StateManager statemanager) : base("End", statemanager) { stateManager = statemanager; }
 
     public override void Enter() {
         Debug.Log("Player has been defeated");

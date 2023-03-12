@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class State {
     public string name;
-    protected StateManager stateMachine;
+    protected StateManager stateManager;
     protected Phase phase;
     protected Projectile projectile;
     protected MonoBehaviour monoBehaviour;
@@ -17,7 +17,7 @@ public class State {
 
     public State(string name, StateManager stateMachine) {
         this.name = name;
-        this.stateMachine = stateMachine;
+        this.stateManager = stateMachine;
     }
 
     public virtual void Enter() { }
