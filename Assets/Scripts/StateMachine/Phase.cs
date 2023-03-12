@@ -8,13 +8,14 @@ public class Phase {
     private Projectile projectile;
     private Player player;
     private StateManager stateManager;
+    private CardManager cardManager;
 
     public void EnterDraw(State state) {
         Debug.Log("draw card");
-        stateManager = GameObject.Find("StateManager").GetComponent<StateManager>();
+        stateManager = GameObject.Find("GameManager").GetComponent<StateManager>();
+        cardManager = GameObject.Find("GameManager").GetComponent<CardManager>();
         if (stateManager.State == StateManager.StateStatus.player1) { player = GameObject.Find("Player1").GetComponent<Player>(); }
         else if (stateManager.State == StateManager.StateStatus.player2) { player = GameObject.Find("Player2").GetComponent<Player>(); }
-        Debug.Log(player);
         projectile = GameObject.FindGameObjectWithTag("Projectile").GetComponent<Projectile>();
         projectile.CanShoot = false;
         // Wait till card has been drawn from the deck
@@ -51,6 +52,7 @@ public class Phase {
         player.Hand.Add(drawnCard);
         Debug.Log($"Draw {drawnCard}");
         Debug.Log($"Player has {player.Hand.Count} cards in hand");
+        cardManager.UpdateHand();
 
         state.CurrentPhase = PhaseStatus.card;
         MonoInstance.instance.StopCoroutine(WaitForCardDrawn(state));

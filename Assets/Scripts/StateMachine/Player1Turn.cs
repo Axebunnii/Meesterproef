@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Player1Turn : State {
-    public Player1Turn(StateManager worldState) : base("Player1Turn", worldState) { stateMachine = worldState; }
+    public Player1Turn(StateManager statemanager) : base("Player1Turn", statemanager) { stateManager = statemanager; }
 
     public override void Enter() {
         Debug.Log("start player 1 turn");
@@ -17,7 +17,7 @@ public class Player1Turn : State {
         GameObject ins = Object.Instantiate(prefab, anchor.transform.position, Quaternion.identity);
         ins.GetComponent<SpringJoint2D>().connectedBody = anchor.GetComponent<Rigidbody2D>();
         projectile = GameObject.FindGameObjectWithTag("Projectile").GetComponent<Projectile>();
-        stateMachine.State = StateManager.StateStatus.player1;
+        stateManager.State = StateManager.StateStatus.player1;
 
         Update();
     }
@@ -35,6 +35,6 @@ public class Player1Turn : State {
 
     public override void Exit() {
         Debug.Log("exit player 1 turn, enter player 2 turn");
-        stateMachine.ChangeState(new Player2Turn(stateMachine));
+        stateManager.ChangeState(new Player2Turn(stateManager));
     }
 }
