@@ -125,7 +125,7 @@ public class Projectile : MonoBehaviour {
     }
 
     protected IEnumerator DeleteProjectile() {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(3);
         stateManager.CurrentState.Exit();
         Destroy(this.gameObject);
     }

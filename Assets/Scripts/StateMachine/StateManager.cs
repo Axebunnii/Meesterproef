@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class StateManager : MonoBehaviour {
-    public enum StateStatus { player1, player2, end };
+    public enum StateStatus { start, player1, player2, end };
     protected StateStatus state;
     public StateStatus State {
         set { state = value; }
@@ -17,7 +17,7 @@ public class StateManager : MonoBehaviour {
     }
 
     void Start() {
-        currentState = new Player1Turn(this);
+        currentState = new StartState(this);
         RunCurrentState();
     }
 

@@ -1087,7 +1087,6 @@ GameObject:
   - component: {fileID: 702968002}
   - component: {fileID: 702968004}
   - component: {fileID: 702968003}
-  - component: {fileID: 702968005}
   m_Layer: 5
   m_Name: Deck
   m_TagString: Untagged
@@ -1153,18 +1152,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 702968001}
   m_CullTransparentMesh: 1
---- !u!114 &702968005
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 702968001}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 669e6406d0287bb4f86c2bbb654ee4d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &723539158
 GameObject:
   m_ObjectHideFlags: 0
@@ -2058,6 +2045,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90764b080364999429b2b3df4784fcc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cardManager: {fileID: 1374722260}
 --- !u!4 &1374722259
 Transform:
   m_ObjectHideFlags: 0
@@ -2084,6 +2072,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 669e6406d0287bb4f86c2bbb654ee4d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  handUI: {fileID: 795632549}
 --- !u!1 &1480206167
 GameObject:
   m_ObjectHideFlags: 0
