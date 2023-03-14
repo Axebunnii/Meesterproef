@@ -51,3 +51,6 @@ TagManager:
   - name: Projectile
     uniqueID: 2424325051
     locked: 0
+  - name: Catapult
+    uniqueID: 4132272847
+    locked: 0
