@@ -9,6 +9,8 @@ public class CardManager : MonoBehaviour {
     public Player CurrentPlayer {
         set { currentPlayer = value; }
     }
+    private int deckCount;
+    [SerializeField] private Text deckCountText;
 
     private void Start() {
         foreach (Transform handSlot in handUI.transform) {
@@ -34,6 +36,8 @@ public class CardManager : MonoBehaviour {
             card.SetActive(true);
             card.GetComponent<Image>().sprite = sprite;
         }
+        deckCount = currentPlayer.Deck.Count;
+        deckCountText.text = deckCount.ToString();
     }
 
     public void TakeOpeningHand(Player player) {
@@ -54,6 +58,7 @@ public class CardManager : MonoBehaviour {
         Card drawnCard = currentPlayer.Deck[randomNumber];
         // Add the drawn card to the players' hand
         currentPlayer.Hand.Add(drawnCard);
+        currentPlayer.Deck.Remove(drawnCard);
         Debug.Log($"Draw {drawnCard}");
         Debug.Log($"Player has {currentPlayer.Hand.Count} cards in hand");
         UpdateHand();
