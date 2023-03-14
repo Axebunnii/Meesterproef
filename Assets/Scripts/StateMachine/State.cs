@@ -17,7 +17,7 @@ public class State {
 
     public State(string name, StateManager stateMachine) {
         this.name = name;
-        this.stateManager = stateMachine;
+        stateManager = stateMachine;
     }
 
     public virtual void Enter() { }

@@ -46,13 +46,10 @@ public class Phase {
 
             yield return null;
         }
+
+        cardManager.CurrentPlayer = player;
         // Draw random card
-        int randomNumber = Random.Range(0, player.Deck.Count - 1);
-        Card drawnCard = player.Deck[randomNumber];
-        player.Hand.Add(drawnCard);
-        Debug.Log($"Draw {drawnCard}");
-        Debug.Log($"Player has {player.Hand.Count} cards in hand");
-        cardManager.UpdateHand();
+        cardManager.DrawCard();
 
         state.CurrentPhase = PhaseStatus.card;
         MonoInstance.instance.StopCoroutine(WaitForCardDrawn(state));
