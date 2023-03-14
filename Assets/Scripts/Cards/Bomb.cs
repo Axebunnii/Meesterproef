@@ -4,4 +4,8 @@ using UnityEngine;
 
 public class Bomb : Card {
     public Bomb() : base("Bomb") { }
+
+    public override void Use() {
+        Debug.Log("Use bomb");
+    }
 }

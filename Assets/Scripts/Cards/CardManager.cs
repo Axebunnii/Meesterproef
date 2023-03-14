@@ -20,6 +20,7 @@ public class CardManager : MonoBehaviour {
     public void UpdateHand() {
         GameObject card;
         Sprite sprite;
+        Vector3 position;
 
         // Reset the shown cards
         foreach (Transform handSlot in handUI.transform) {
@@ -29,7 +30,7 @@ public class CardManager : MonoBehaviour {
         // Show cards in hand
         for (int i = 0; i < currentPlayer.Hand.Count; i++) {
             card = handUI.transform.GetChild(i).gameObject;
-            sprite = Resources.Load<Sprite>($"Cards/{currentPlayer.Hand[i].CardName}");
+            sprite = Resources.Load<Sprite>($"CardSprites/{currentPlayer.Hand[i].CardName}");
             card.SetActive(true);
             card.GetComponent<Image>().sprite = sprite;
         }
