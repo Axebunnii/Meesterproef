@@ -2517,6 +2517,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   handUI: {fileID: 795632549}
+  deckCountText: {fileID: 1104643266}
 --- !u!1 &1480206167
 GameObject:
   m_ObjectHideFlags: 0
