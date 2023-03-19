@@ -9,8 +9,21 @@ public class CardManager : MonoBehaviour {
     public Player CurrentPlayer {
         set { currentPlayer = value; }
     }
+
     private int deckCount;
     [SerializeField] private Text deckCountText;
+
+    private int discardCount = 0;
+    [SerializeField] private Text discardCountText;
+
+    [SerializeField] private Image turnDisplay;
+    [SerializeField] private Text turnDisplayText;
+
+    private bool endCardPhase = false;
+    public bool EndCardPhase {
+        get { return endCardPhase; }
+        set { endCardPhase = value; }
+    }
 
     private void Start() {
         foreach (Transform handSlot in handUI.transform) {
@@ -47,7 +60,11 @@ public class CardManager : MonoBehaviour {
         }
     }
 
-    public void ShowPlayerHand() {
+    public void UpdatePlayerUI() {
+        // if player 1 turn
+        turnDisplay.GetComponent<SpriteRenderer>().color = new Color(0, 80, 255);
+        // if player 2 turn
+        // turnDisplay.GetComponent<SpriteRenderer>().color = new Color(255, 140, 0);
         UpdateHand();
     }
 
@@ -62,5 +79,14 @@ public class CardManager : MonoBehaviour {
         Debug.Log($"Draw {drawnCard}");
         Debug.Log($"Player has {currentPlayer.Hand.Count} cards in hand");
         UpdateHand();
+    }
+
+    public void PlayCard() {
+        Debug.Log("Play card");
+    }
+
+    public void EndCardPhasePressed() {
+        Debug.Log("Pressed button");
+        endCardPhase = true;
     }
 }
