@@ -36,11 +36,12 @@ public class CameraController : MonoBehaviour {
         focusProjectile = GameObject.FindGameObjectWithTag("Projectile");
         Vector3 position = transform.position;
 
-        if (focusProjectile.transform.position.x > 4) {
+        if (focusProjectile.transform.position.x > offset.x) {
             position.x = (focusProjectile.transform.position - offset).x;
+            // lerp to position
             transform.position = position;
         }
-        else if (focusProjectile.transform.position.x > 4) {
+        else if (focusProjectile.transform.position.x > offset.x) {
             position.x = (focusProjectile.transform.position - offset).x;
             transform.position = position;
         }

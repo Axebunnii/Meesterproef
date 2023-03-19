@@ -1,19 +1,22 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Phase {
     // 1. draw phase    2. card phase   3.shoot phase
     public enum PhaseStatus {draw, card, shoot};
     private Projectile projectile;
     private Player player;
-    private StateManager stateManager;
-    private CardManager cardManager;
+    private StateManager stateManager = GameObject.Find("GameManager").GetComponent<StateManager>();
+    private CardManager cardManager = GameObject.Find("GameManager").GetComponent<CardManager>();
+    private Button endCardButton = GameObject.Find("Button").GetComponent<Button>();
 
     public void EnterDraw(State state) {
         Debug.Log("draw card");
-        stateManager = GameObject.Find("GameManager").GetComponent<StateManager>();
-        cardManager = GameObject.Find("GameManager").GetComponent<CardManager>();
+        cardManager.EndCardPhase = false;
+        endCardButton.enabled = false;
         if (stateManager.State == StateManager.StateStatus.player1) { player = GameObject.Find("Player1").GetComponent<Player>(); }
         else if (stateManager.State == StateManager.StateStatus.player2) { player = GameObject.Find("Player2").GetComponent<Player>(); }
         projectile = GameObject.FindGameObjectWithTag("Projectile").GetComponent<Projectile>();
@@ -22,12 +25,9 @@ public class Phase {
         MonoInstance.instance.StartCoroutine(WaitForCardDrawn(state));
     }
 
-    private void ExitDraw(State state) {
-        state.Update();
-    }
-
     public void PlayCard(State state) {
-        MonoInstance.instance.StartCoroutine(WaitForCardPlayed(state));
+        endCardButton.enabled = true;
+        MonoInstance.instance.StartCoroutine(WaitForEndCardPhase(state));
     }
 
     public void Shoot() {
@@ -53,17 +53,18 @@ public class Phase {
 
         state.CurrentPhase = PhaseStatus.card;
         MonoInstance.instance.StopCoroutine(WaitForCardDrawn(state));
-        ExitDraw(state);
+        state.Update();
     }
 
-    private IEnumerator WaitForCardPlayed(State state) {
-        while (!Input.GetKeyDown(KeyCode.A)) {
-            yield return null;
-        }
+    private IEnumerator WaitForEndCardPhase(State state) {
+        yield return new WaitUntil(() => cardManager.EndCardPhase == true);
         state.CurrentPhase = PhaseStatus.shoot;
+        Debug.Log("Ending card phase");
         // Activate card effect
 
-        MonoInstance.instance.StopCoroutine(WaitForCardPlayed(state));
+        // Delete card from hand
+
+        MonoInstance.instance.StopCoroutine(WaitForEndCardPhase(state));
         state.Update();
     }
 }

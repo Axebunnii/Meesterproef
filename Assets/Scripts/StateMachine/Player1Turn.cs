@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Player1Turn : State {
-    public Player1Turn(StateManager statemanager) : base("Player1Turn", statemanager) { stateManager = statemanager; }
+    public Player1Turn(StateManager sm) : base("Player1Turn", sm) { stateManager = sm; }
 
     public override void Enter() {
         Debug.Log("start player 1 turn");
