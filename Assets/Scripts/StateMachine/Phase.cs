@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
+
 
 public class Phase {
     // 1. draw phase    2. card phase   3.shoot phase
@@ -16,7 +18,12 @@ public class Phase {
     public void EnterDraw(State state) {
         Debug.Log("draw card");
         cardManager.EndCardPhase = false;
+        // Make button unclickable
         endCardButton.enabled = false;
+        // Make cards unclickable
+        foreach (Transform card in GameObject.Find("Hand").transform) {
+            card.gameObject.GetComponent<EventTrigger>().enabled = false;
+        }
         if (stateManager.State == StateManager.StateStatus.player1) { player = GameObject.Find("Player1").GetComponent<Player>(); }
         else if (stateManager.State == StateManager.StateStatus.player2) { player = GameObject.Find("Player2").GetComponent<Player>(); }
         projectile = GameObject.FindGameObjectWithTag("Projectile").GetComponent<Projectile>();
@@ -26,11 +33,22 @@ public class Phase {
     }
 
     public void PlayCard(State state) {
+        // Make button clickable
         endCardButton.enabled = true;
+        // Make cards clickable
+        foreach (Transform card in GameObject.Find("Hand").transform) {
+            card.gameObject.GetComponent<EventTrigger>().enabled = true;
+        }
         MonoInstance.instance.StartCoroutine(WaitForEndCardPhase(state));
     }
 
     public void Shoot() {
+        // Make button unclickable
+        endCardButton.enabled = false;
+        // Make cards unclickable
+        foreach (Transform card in GameObject.Find("Hand").transform) {
+            card.gameObject.GetComponent<EventTrigger>().enabled = false;
+        }
         projectile = GameObject.FindGameObjectWithTag("Projectile").GetComponent<Projectile>();
         // Player is able to shoot
         projectile.CanShoot = true;
