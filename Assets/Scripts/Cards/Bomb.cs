@@ -6,6 +6,7 @@ public class Bomb : Card {
     public Bomb() : base("Bomb") { }
 
     public override void Use() {
-        Debug.Log("Use bomb");
+        GameObject prefab = Resources.Load("Projectiles/Bomb") as GameObject;
+        ReplaceProjectile(prefab);
     }
 }

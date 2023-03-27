@@ -48,9 +48,6 @@ public class Projectile : MonoBehaviour {
         if (draggable && canShoot) {
             DragProjectile();
         }
-        if (hitGround) {
-            DecreaseVelocity(velocity);
-        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {
@@ -119,12 +116,7 @@ public class Projectile : MonoBehaviour {
         rb.constraints = RigidbodyConstraints2D.None;
     }
 
-    protected void DecreaseVelocity(float vel) {
-        //Debug.Log(Time.deltaTime);
-        //this.gameObject.GetComponent<Rigidbody2D>().velocity = (vel/Time.deltaTime);
-    }
-
-    protected IEnumerator DeleteProjectile() {
+    protected virtual IEnumerator DeleteProjectile() {
         yield return new WaitForSeconds(3);
         stateManager.CurrentState.Exit();
         Destroy(this.gameObject);

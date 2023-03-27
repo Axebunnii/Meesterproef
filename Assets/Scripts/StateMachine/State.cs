@@ -21,6 +21,17 @@ public class State {
     }
 
     public virtual void Enter() { }
-    public virtual void Update() { }
+
+    public virtual void Update() {
+        Debug.Log($"current phase: {currentPhase}");
+        if (currentPhase == Phase.PhaseStatus.draw) {
+            phase.EnterDraw(this);
+        } else if (currentPhase == Phase.PhaseStatus.card) {
+            phase.PlayCard(this);
+        } else if (currentPhase == Phase.PhaseStatus.shoot) {
+            phase.Shoot();
+        }
+    }
+
     public virtual void Exit() { }
 }
