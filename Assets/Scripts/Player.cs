@@ -32,14 +32,7 @@ public class Player : MonoBehaviour {
         lifePointSlider.value = currentLP;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision) {
-        Debug.Log($"Collide velocity is {collision.relativeVelocity.magnitude}");
-        if (collision.gameObject.tag == "Projectile" && collision.relativeVelocity.magnitude > 15) {
-            GetDamage(110);
-        }
-    }
-
-    private void GetDamage(int damage) {
+    public void GetDamage(int damage) {
         currentLP -= damage;
         UpdateHealthBar();
     }

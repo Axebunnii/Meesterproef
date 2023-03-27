@@ -16,4 +16,8 @@ public class BombProjectile : Projectile {
         stateManager.CurrentState.Exit();
         Destroy(this.gameObject);
     }
+
+    protected override void AssignDamage() {
+        damage = 250;
+    }
 }
