@@ -42,6 +42,7 @@ public class Projectile : MonoBehaviour {
         springJoint = projectile.gameObject.GetComponent<SpringJoint2D>();
         mainCamera = Camera.main.GetComponent<CameraController>();
         stateManager = GameObject.Find("GameManager").GetComponent<StateManager>();
+        AssignDamage();
     }
 
     protected void Update() {
@@ -55,6 +56,10 @@ public class Projectile : MonoBehaviour {
         if (collision.gameObject.name == "Ground") {
             velocity = collision.relativeVelocity.magnitude;
             hitGround = true;
+        }
+        Debug.Log($"Collide velocity is {collision.relativeVelocity.magnitude}");
+        if (collision.gameObject.tag == "Player" && collision.relativeVelocity.magnitude > 15) {
+            collision.gameObject.GetComponent<Player>().GetDamage(damage);
         }
 
         // Delete projectile in 10 seconds after it hit something
@@ -120,5 +125,9 @@ public class Projectile : MonoBehaviour {
         yield return new WaitForSeconds(3);
         stateManager.CurrentState.Exit();
         Destroy(this.gameObject);
+    }
+
+    protected virtual void AssignDamage() {
+
     }
 }
