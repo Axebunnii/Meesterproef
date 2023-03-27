@@ -18,7 +18,7 @@ public class Card : MonoBehaviour{
         
     }
 
-    protected void ReplaceProjectile(GameObject prefab) {
+    protected virtual void ReplaceProjectile(GameObject prefab) {
         // Get the projectile that will be replaced
         currentProjectile = GameObject.FindGameObjectWithTag("Projectile");
         Rigidbody2D anchor = currentProjectile.GetComponent<SpringJoint2D>().connectedBody;

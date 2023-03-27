@@ -52,18 +52,19 @@ public class Projectile : MonoBehaviour {
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {
+        Debug.Log(collision.gameObject.name);
         //if collide with ground decrease velocity
         if (collision.gameObject.name == "Ground") {
             velocity = collision.relativeVelocity.magnitude;
             hitGround = true;
+            // Delete projectile in 3 seconds after it hit the ground
+            StartCoroutine(DeleteProjectile());
         }
-        Debug.Log($"Collide velocity is {collision.relativeVelocity.magnitude}");
         if (collision.gameObject.tag == "Player" && collision.relativeVelocity.magnitude > 15) {
             collision.gameObject.GetComponent<Player>().GetDamage(damage);
-        }
-
-        // Delete projectile in 10 seconds after it hit something
-        StartCoroutine(DeleteProjectile());
+            // Delete projectile in 3 seconds after it hit the player
+            StartCoroutine(DeleteProjectile());
+        }        
     }
 
     // Drag projectile when holding down mousebutton
@@ -128,6 +129,6 @@ public class Projectile : MonoBehaviour {
     }
 
     protected virtual void AssignDamage() {
-
+        
     }
 }
