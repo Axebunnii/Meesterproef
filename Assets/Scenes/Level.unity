@@ -237,7 +237,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -40, y: -2}
+  m_AnchoredPosition: {x: -40, y: 0}
   m_SizeDelta: {x: 55, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &128792914
@@ -298,11 +298,11 @@ MonoBehaviour:
         - m_Target: {fileID: 1374722260}
           m_TargetAssemblyTypeName: CardManager, Assembly-CSharp
           m_MethodName: PlayCard
-          m_Mode: 1
+          m_Mode: 3
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
+            m_IntArgument: 2
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
@@ -562,7 +562,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 231544208}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 17.05, y: -1.8, z: 0}
+  m_LocalPosition: {x: 19.65, y: -1.8, z: 0}
   m_LocalScale: {x: 1, y: 2.7352, z: 1}
   m_Children:
   - {fileID: 1496921987}
@@ -720,7 +720,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 200, y: -2.0000076}
+  m_AnchoredPosition: {x: 200, y: 0}
   m_SizeDelta: {x: 55, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &307879220
@@ -781,11 +781,11 @@ MonoBehaviour:
         - m_Target: {fileID: 1374722260}
           m_TargetAssemblyTypeName: CardManager, Assembly-CSharp
           m_MethodName: PlayCard
-          m_Mode: 1
+          m_Mode: 3
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
+            m_IntArgument: 6
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
@@ -1287,7 +1287,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 662993518}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.54, y: -1.8, z: 0}
+  m_LocalPosition: {x: -6.24, y: -1.8, z: 0}
   m_LocalScale: {x: 1, y: 2.7352, z: 1}
   m_Children:
   - {fileID: 235870696}
@@ -1532,7 +1532,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 140, y: -2.0000076}
+  m_AnchoredPosition: {x: 140, y: 0}
   m_SizeDelta: {x: 55, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &810757349
@@ -1593,11 +1593,11 @@ MonoBehaviour:
         - m_Target: {fileID: 1374722260}
           m_TargetAssemblyTypeName: CardManager, Assembly-CSharp
           m_MethodName: PlayCard
-          m_Mode: 1
+          m_Mode: 3
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
+            m_IntArgument: 5
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
@@ -1879,7 +1879,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 20, y: -2.0000076}
+  m_AnchoredPosition: {x: 20, y: 0}
   m_SizeDelta: {x: 55, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1019138355
@@ -1940,11 +1940,11 @@ MonoBehaviour:
         - m_Target: {fileID: 1374722260}
           m_TargetAssemblyTypeName: CardManager, Assembly-CSharp
           m_MethodName: PlayCard
-          m_Mode: 1
+          m_Mode: 3
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
+            m_IntArgument: 3
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
@@ -2382,7 +2382,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -100, y: -2.0000076}
+  m_AnchoredPosition: {x: -100, y: 0}
   m_SizeDelta: {x: 55, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1189260513
@@ -2443,11 +2443,11 @@ MonoBehaviour:
         - m_Target: {fileID: 1374722260}
           m_TargetAssemblyTypeName: CardManager, Assembly-CSharp
           m_MethodName: PlayCard
-          m_Mode: 2
+          m_Mode: 3
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Sprite, UnityEngine
-            m_IntArgument: 0
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
@@ -3491,7 +3491,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 80, y: -2.0000076}
+  m_AnchoredPosition: {x: 80, y: 0}
   m_SizeDelta: {x: 55, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1933158128
@@ -3552,11 +3552,11 @@ MonoBehaviour:
         - m_Target: {fileID: 1374722260}
           m_TargetAssemblyTypeName: CardManager, Assembly-CSharp
           m_MethodName: PlayCard
-          m_Mode: 1
+          m_Mode: 3
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
+            m_IntArgument: 4
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
@@ -3678,6 +3678,7 @@ GameObject:
   - component: {fileID: 2115139983}
   - component: {fileID: 2115139982}
   - component: {fileID: 2115139984}
+  - component: {fileID: 4222154391433647253}
   m_Layer: 5
   m_Name: Card
   m_TagString: Untagged
@@ -3701,7 +3702,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -160, y: -2.0000076}
+  m_AnchoredPosition: {x: -160, y: 0}
   m_SizeDelta: {x: 55, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2115139982
@@ -3762,12 +3763,24 @@ MonoBehaviour:
         - m_Target: {fileID: 1374722260}
           m_TargetAssemblyTypeName: CardManager, Assembly-CSharp
           m_MethodName: PlayCard
-          m_Mode: 2
+          m_Mode: 3
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Sprite, UnityEngine
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &4222154391433647253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2115139980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8c1c487e3ecd184582690700fb68871, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

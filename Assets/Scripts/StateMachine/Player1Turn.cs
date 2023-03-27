@@ -22,17 +22,6 @@ public class Player1Turn : State {
         Update();
     }
 
-    public override void Update() {
-        Debug.Log($"current phase: {currentPhase}");
-        if (currentPhase == Phase.PhaseStatus.draw) {
-            phase.EnterDraw(this);
-        } else if (currentPhase == Phase.PhaseStatus.card) {
-            phase.PlayCard(this);
-        } else if (currentPhase == Phase.PhaseStatus.shoot) {
-            phase.Shoot();
-        }
-    }
-
     public override void Exit() {
         Debug.Log("exit player 1 turn, enter player 2 turn");
         stateManager.ChangeState(new Player2Turn(stateManager));

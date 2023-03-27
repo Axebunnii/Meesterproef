@@ -81,8 +81,15 @@ public class CardManager : MonoBehaviour {
         UpdateHand();
     }
 
-    public void PlayCard() {
-        Debug.Log("Play card");
+    public void PlayCard(int i) {
+        Debug.Log(i);
+        Card card = currentPlayer.Hand[i];
+        // Activate card effect
+        card.Use();
+
+        // Remove the card from players hand
+        currentPlayer.Hand.Remove(card);
+        UpdateHand();
     }
 
     public void EndCardPhasePressed() {
