@@ -5,6 +5,7 @@ using UnityEngine;
 public class Card : MonoBehaviour{
     protected string cardName;
     protected GameObject currentProjectile;
+    protected List<GameObject> currentProjectiles;
 
     public string CardName {
         get { return cardName; }
