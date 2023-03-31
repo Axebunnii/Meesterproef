@@ -12,8 +12,8 @@ public class StartState : State {
     public override void Enter() {
         Debug.Log("Start level");
         cardManager = GameObject.Find("GameManager").GetComponent<CardManager>();
-        player1 = GameObject.Find("Player1").GetComponent<Player>();
-        player2 = GameObject.Find("Player2").GetComponent<Player>();
+        player1 = GameObject.Find("Player 1").GetComponent<Player>();
+        player2 = GameObject.Find("Player 2").GetComponent<Player>();
         Update();
     }
 

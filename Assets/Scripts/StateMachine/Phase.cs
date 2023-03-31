@@ -24,8 +24,8 @@ public class Phase {
         foreach (Transform card in GameObject.Find("Hand").transform) {
             card.gameObject.GetComponent<EventTrigger>().enabled = false;
         }
-        if (stateManager.State == StateManager.StateStatus.player1) { player = GameObject.Find("Player1").GetComponent<Player>(); }
-        else if (stateManager.State == StateManager.StateStatus.player2) { player = GameObject.Find("Player2").GetComponent<Player>(); }
+        if (stateManager.State == StateManager.StateStatus.player1) { player = GameObject.Find("Player 1").GetComponent<Player>(); }
+        else if (stateManager.State == StateManager.StateStatus.player2) { player = GameObject.Find("Player 2").GetComponent<Player>(); }
         projectile = GameObject.FindGameObjectWithTag("Projectile").GetComponent<Projectile>();
         projectile.CanShoot = false;
         // Wait till card has been drawn from the deck
