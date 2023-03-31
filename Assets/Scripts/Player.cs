@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour {
     [SerializeField] private Slider lifePointSlider;
+    [SerializeField] private Player otherPlayer;
+    private UIManager uiManager;
 
     private int currentLP;
     private int CurrentLP {
@@ -30,15 +32,23 @@ public class Player : MonoBehaviour {
     private void Start() {
         currentLP = maxLP;
         lifePointSlider.value = currentLP;
+        uiManager = GameObject.Find("GameManager").GetComponent<UIManager>();
     }
 
     public void GetDamage(int damage) {
         currentLP -= damage;
         UpdateHealthBar();
+        CheckHealth();
     }
 
     private void UpdateHealthBar() {
         Debug.Log("Update healthbar");
         lifePointSlider.value = currentLP;
+    }
+
+    private void CheckHealth() {
+        if (currentLP <= 0)
+            // Show winner
+            uiManager.ShowResults(otherPlayer);
     }
 }
