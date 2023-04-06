@@ -211,7 +211,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 123713019}
-  - component: {fileID: 123713021}
   - component: {fileID: 123713020}
   m_Layer: 0
   m_Name: Border
@@ -260,19 +259,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 5.0279274, y: 30.413258}
   m_EdgeRadius: 0
---- !u!114 &123713021
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 123713018}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16dea24c8007a184bad43e2694fcfaa3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stateManager: {fileID: 1374722258}
 --- !u!1 &128792912
 GameObject:
   m_ObjectHideFlags: 0
@@ -633,7 +619,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 231544208}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 29.9, y: -1.8, z: 0}
+  m_LocalPosition: {x: 20, y: -1.8, z: 0}
   m_LocalScale: {x: 1, y: 2.7352, z: 1}
   m_Children:
   - {fileID: 1496921987}
@@ -1519,7 +1505,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 662993518}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.01, y: -1.8, z: 0}
+  m_LocalPosition: {x: -5.8899994, y: -1.8, z: 0}
   m_LocalScale: {x: 1, y: 2.7352, z: 1}
   m_Children:
   - {fileID: 235870696}
@@ -2727,7 +2713,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1169885960}
-  - component: {fileID: 1169885962}
   - component: {fileID: 1169885961}
   m_Layer: 0
   m_Name: Border
@@ -2776,19 +2761,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 61.367474, y: 4.7783794}
   m_EdgeRadius: 0
---- !u!114 &1169885962
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1169885959}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16dea24c8007a184bad43e2694fcfaa3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stateManager: {fileID: 1374722258}
 --- !u!1 &1189260511
 GameObject:
   m_ObjectHideFlags: 0
@@ -3973,7 +3945,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1750159419}
-  - component: {fileID: 1750159421}
   - component: {fileID: 1750159420}
   m_Layer: 0
   m_Name: Border
@@ -4022,19 +3993,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 5.269024, y: 30.057768}
   m_EdgeRadius: 0
---- !u!114 &1750159421
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1750159418}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16dea24c8007a184bad43e2694fcfaa3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stateManager: {fileID: 1374722258}
 --- !u!1 &1889014823
 GameObject:
   m_ObjectHideFlags: 0

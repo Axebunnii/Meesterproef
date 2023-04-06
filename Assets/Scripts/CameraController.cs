@@ -30,7 +30,10 @@ public class CameraController : MonoBehaviour {
     }
 
     private void FocusOnPlayer(GameObject player) {
-        this.transform.position = player.transform.position;
+        Vector3 newPosition = transform.position;
+        newPosition.x = Mathf.Lerp(transform.localPosition.x, player.transform.localPosition.x, Time.deltaTime * 8);
+
+        transform.localPosition = newPosition;
     }
 
     private void FollowProjectile() {
@@ -40,18 +43,5 @@ public class CameraController : MonoBehaviour {
         newPosition.x = Mathf.Lerp(transform.localPosition.x, focusProjectile.transform.localPosition.x, Time.deltaTime * 8);
 
         transform.localPosition = newPosition;
-
-        /*focusProjectile = GameObject.FindGameObjectWithTag("Projectile");
-        Vector3 position = transform.position;
-
-        if (focusProjectile.transform.position.x > offset.x) {
-            position.x = (focusProjectile.transform.position - offset).x;
-            // lerp to position
-            transform.position = position;
-        }
-        else if (focusProjectile.transform.position.x > offset.x) {
-            position.x = (focusProjectile.transform.position - offset).x;
-            transform.position = position;
-        }*/
     }
 }
