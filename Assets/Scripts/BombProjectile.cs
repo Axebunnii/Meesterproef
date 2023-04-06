@@ -13,6 +13,7 @@ public class BombProjectile : Projectile {
         explosion.Play();
         yield return new WaitForSeconds(1f);
 
+        stateManager.CurrentProjectiles.Remove(this.gameObject);
         stateManager.CurrentState.Exit();
         Destroy(this.gameObject);
     }

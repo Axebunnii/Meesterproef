@@ -24,6 +24,7 @@ public class Projectile : MonoBehaviour {
     protected bool draggable = true;
     protected bool hitGround = false;
     protected float velocity;
+    protected float mass;
 
     /*[SerializeField] protected StateManager.StateStatus state;
     public StateManager.StateStatus State {
@@ -42,6 +43,8 @@ public class Projectile : MonoBehaviour {
         springJoint = projectile.gameObject.GetComponent<SpringJoint2D>();
         mainCamera = Camera.main.GetComponent<CameraController>();
         stateManager = GameObject.Find("GameManager").GetComponent<StateManager>();
+        mass = Random.Range(0.8f, 5f);
+        rb.mass = mass;
         AssignDamage();
     }
 
@@ -52,9 +55,14 @@ public class Projectile : MonoBehaviour {
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {
-        Debug.Log(collision.gameObject.name);
+        /*// Ignore collision with another projectile
+        if (collision.gameObject.tag == "Projectile") {
+            Physics2D.IgnoreCollision(collision.collider, GetComponent<CircleCollider2D>());
+        }*/
+
         //if collide with ground decrease velocity
-        if (collision.gameObject.name == "Ground") {
+        if (collision.gameObject.name == "Ground" || collision.gameObject.name == "Border") {
+            Debug.Log(collision.gameObject.name);
             velocity = collision.relativeVelocity.magnitude;
             hitGround = true;
             // Delete projectile in 3 seconds after it hit the ground
@@ -69,9 +77,10 @@ public class Projectile : MonoBehaviour {
 
     // Drag projectile when holding down mousebutton
     protected void OnMouseDown() {
-        if (!canShoot) {
+       if (!canShoot) {
             return;
-        }
+       }
+
         isHold = true;
         // Make it kinematic otherwise the anchor will pull it back
         rb.isKinematic = true;
@@ -82,10 +91,12 @@ public class Projectile : MonoBehaviour {
         if (!canShoot) {
             return;
         }
+
         isHold = false;
         rb.isKinematic = false;
         StartCoroutine(ReleaseProjectile());
         mainCamera.currentFocus = CameraController.CameraFocus.projectile;
+        //StartCoroutine(EnableCollsion());
     }
 
     protected void DragProjectile() {
@@ -104,6 +115,14 @@ public class Projectile : MonoBehaviour {
             } else {
                 rb.position = mousePos;
             }
+
+            for (int i = 0; i < stateManager.CurrentProjectiles.Count; i++) {
+                if (stateManager.CurrentProjectiles[i] != gameObject) {
+                    //stateManager.CurrentProjectiles[i].GetComponent<CircleCollider2D>().enabled = false;
+                    stateManager.CurrentProjectiles[i].transform.position = transform.position;
+
+                }
+            }
         }
     }
 
@@ -113,22 +132,52 @@ public class Projectile : MonoBehaviour {
 
     protected IEnumerator ReleaseProjectile() {
         yield return new WaitForSeconds(releaseTime);
-        // Remove the anchor its attached to
+
+        /*// Remove the anchor its attached to
         springJoint.enabled = false;
         draggable = false;
         //this.enabled = false;
 
         // Remove rotation constraints
-        rb.constraints = RigidbodyConstraints2D.None;
+        rb.constraints = RigidbodyConstraints2D.None;*/
+
+        for (int i = 0; i < stateManager.CurrentProjectiles.Count; i++) {
+            Projectile p = null;
+            p = stateManager.CurrentProjectiles[i].GetComponent<StoneProjectile>();
+            if (p != null) {
+                // Remove the anchor its attached to
+                p.springJoint.enabled = false;
+                p.draggable = false;
+                //this.enabled = false;
+
+                // Remove rotation constraints
+                p.rb.constraints = RigidbodyConstraints2D.None;
+            } else {
+                p = stateManager.CurrentProjectiles[i].GetComponent<BombProjectile>();
+                // Remove the anchor its attached to
+                p.springJoint.enabled = false;
+                p.draggable = false;
+                //this.enabled = false;
+
+                // Remove rotation constraints
+                p.rb.constraints = RigidbodyConstraints2D.None;
+            }
+        }
     }
+
+    /*protected IEnumerator EnableCollsion() {
+        yield return new WaitForSeconds(1);
+        for (int i = 0; i < stateManager.CurrentProjectiles.Count; i++) {
+            stateManager.CurrentProjectiles[i].GetComponent<CircleCollider2D>().enabled = true;
+        }
+    }*/
 
     protected virtual IEnumerator DeleteProjectile() {
         yield return new WaitForSeconds(3);
+        stateManager.CurrentProjectiles.Remove(this.gameObject);
         stateManager.CurrentState.Exit();
         Destroy(this.gameObject);
     }
 
-    protected virtual void AssignDamage() {
-        
-    }
+    protected virtual void AssignDamage() { }
 }

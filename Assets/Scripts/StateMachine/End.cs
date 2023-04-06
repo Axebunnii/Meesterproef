@@ -3,16 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class End : State {
-    public End(StateManager statemanager) : base("End", statemanager) { stateManager = statemanager; }
+    private UIManager uiManager;
+
+    public End(StateManager statemanager) : base("End", statemanager) { 
+        stateManager = statemanager;
+        uiManager = GameObject.Find("GameManager").GetComponent<UIManager>();
+    }
 
     public override void Enter() {
-        Debug.Log("Player has been defeated");
         Update();
     }
 
     public override void Update() {
         // Show results
-
+        //uiManager.ShowResults();
         // Exit
         Exit();
     }

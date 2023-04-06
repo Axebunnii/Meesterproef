@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Player2Turn : State {
-    public Player2Turn(StateManager statemanager) : base("Player2Turn", statemanager) { stateManager = statemanager; }
+    public Player2Turn(StateManager sm) : base("Player2Turn", sm) { stateManager = sm; }
 
     public override void Enter() {
         Debug.Log("start player 2 turn");
@@ -16,6 +16,7 @@ public class Player2Turn : State {
         // Make a new stone and attach it to player 2 anchor
         GameObject ins = Object.Instantiate(prefab, anchor.transform.position, Quaternion.identity);
         ins.GetComponent<SpringJoint2D>().connectedBody = anchor.GetComponent<Rigidbody2D>();
+        stateManager.CurrentProjectiles.Add(ins.gameObject);
         projectile = GameObject.FindGameObjectWithTag("Projectile").GetComponent<Projectile>();
         stateManager.State = StateManager.StateStatus.player2;
 
@@ -24,6 +25,8 @@ public class Player2Turn : State {
 
     public override void Exit() {
         Debug.Log("exit player 2 turn, enter player 1 turn");
-        stateManager.ChangeState(new Player1Turn(stateManager));
+        Debug.Log(stateManager.CurrentProjectiles.Count);
+        if (stateManager.CurrentProjectiles.Count == 0)
+            stateManager.ChangeState(new Player1Turn(stateManager));
     }
 }
