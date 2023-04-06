@@ -39,7 +39,7 @@ public class Player : MonoBehaviour {
     public void GetDamage(int damage) {
         currentLP -= damage;
         UpdateHealthBar();
-        CheckHealth();
+        CheckCondetions();
     }
 
     private void UpdateHealthBar() {
@@ -47,11 +47,13 @@ public class Player : MonoBehaviour {
         lifePointSlider.value = currentLP;
     }
 
-    private void CheckHealth() {
+    public void CheckCondetions() {
         if (currentLP <= 0) {
             stateManager.PlayerWon = true;
             // Show winner
             uiManager.ShowResults(otherPlayer);
+        } else if (deck.Count < 1) {
+            uiManager.ShowResults(this);
         }
     }
 }

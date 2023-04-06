@@ -13,11 +13,14 @@ public class Phase {
     private Player player;
     private StateManager stateManager = GameObject.Find("GameManager").GetComponent<StateManager>();
     private CardManager cardManager = GameObject.Find("GameManager").GetComponent<CardManager>();
-    private Button endCardButton = GameObject.Find("Button").GetComponent<Button>();
+    private readonly Button deckButton = GameObject.Find("Deck").GetComponent<Button>();
+    private readonly Button endCardButton = GameObject.Find("Button").GetComponent<Button>();
 
     public void EnterDraw(State state) {
-        Debug.Log("draw card");
+        cardManager.CardDrawn = false;
         cardManager.EndCardPhase = false;
+        // Make the deck clickable
+        deckButton.enabled = true;
         // Make button unclickable
         endCardButton.enabled = false;
         // Make cards unclickable
@@ -33,6 +36,8 @@ public class Phase {
     }
 
     public void PlayCard(State state) {
+        // Make deck unclickable
+        deckButton.enabled = false;
         // Make button clickable
         endCardButton.enabled = true;
         // Make cards clickable
@@ -55,13 +60,11 @@ public class Phase {
     }
 
     private IEnumerator WaitForCardDrawn(State state) {
-        while (!Input.GetKeyDown(KeyCode.Space)) {
-            yield return null;
-        }
+        yield return new WaitUntil(() => cardManager.CardDrawn == true);
         // Draw card
         if (player.Deck.Count < 1) {
             // Player losses game
-
+            player.CheckCondetions();  
             yield return null;
         }
 
