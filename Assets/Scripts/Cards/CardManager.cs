@@ -19,6 +19,12 @@ public class CardManager : MonoBehaviour {
     [SerializeField] private Image turnDisplay;
     [SerializeField] private Text turnDisplayText;
 
+    private bool cardDrawn = false;
+    public bool CardDrawn {
+        get { return cardDrawn; }
+        set { cardDrawn = value; }
+    }
+
     private bool endCardPhase = false;
     public bool EndCardPhase {
         get { return endCardPhase; }
@@ -92,8 +98,11 @@ public class CardManager : MonoBehaviour {
         UpdateHand();
     }
 
+    public void DrawCardFromDeck() {
+        cardDrawn = true;
+    }
+
     public void EndCardPhasePressed() {
-        Debug.Log("Pressed button");
         endCardPhase = true;
     }
 }

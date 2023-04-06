@@ -6,12 +6,12 @@ using UnityEngine.UI;
 public class BombProjectile : Projectile {
     private ParticleSystem explosion;
 
-    protected override IEnumerator DeleteProjectile() {
+    protected override IEnumerator DeleteProjectile(int t) {
         explosion = gameObject.GetComponentInChildren<ParticleSystem>();
         gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("None");
         gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
         explosion.Play();
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1);
 
         stateManager.CurrentProjectiles.Remove(this.gameObject);
         stateManager.CurrentState.Exit();

@@ -60,18 +60,20 @@ public class Projectile : MonoBehaviour {
             Physics2D.IgnoreCollision(collision.collider, GetComponent<CircleCollider2D>());
         }*/
 
-        //if collide with ground decrease velocity
-        if (collision.gameObject.name == "Ground" || collision.gameObject.name == "Border") {
-            Debug.Log(collision.gameObject.name);
-            velocity = collision.relativeVelocity.magnitude;
+        if (collision.gameObject.name == "Ground") {
             hitGround = true;
             // Delete projectile in 3 seconds after it hit the ground
-            StartCoroutine(DeleteProjectile());
+            StartCoroutine(DeleteProjectile(3));
         }
-        if (collision.gameObject.tag == "Player" && collision.relativeVelocity.magnitude > 15) {
-            collision.gameObject.GetComponent<Player>().GetDamage(damage);
+        if (collision.gameObject.name == "Border") {
+            StartCoroutine(DeleteProjectile(0));
+        }
+        if (collision.gameObject.tag == "Player") {
+            if (collision.relativeVelocity.magnitude > 15) {
+                collision.gameObject.GetComponent<Player>().GetDamage(damage); 
+            }
             // Delete projectile in 3 seconds after it hit the player
-            StartCoroutine(DeleteProjectile());
+            StartCoroutine(DeleteProjectile(3));
         }        
     }
 
@@ -132,15 +134,6 @@ public class Projectile : MonoBehaviour {
 
     protected IEnumerator ReleaseProjectile() {
         yield return new WaitForSeconds(releaseTime);
-
-        /*// Remove the anchor its attached to
-        springJoint.enabled = false;
-        draggable = false;
-        //this.enabled = false;
-
-        // Remove rotation constraints
-        rb.constraints = RigidbodyConstraints2D.None;*/
-
         for (int i = 0; i < stateManager.CurrentProjectiles.Count; i++) {
             Projectile p = null;
             p = stateManager.CurrentProjectiles[i].GetComponent<StoneProjectile>();
@@ -165,15 +158,12 @@ public class Projectile : MonoBehaviour {
         }
     }
 
-    /*protected IEnumerator EnableCollsion() {
-        yield return new WaitForSeconds(1);
-        for (int i = 0; i < stateManager.CurrentProjectiles.Count; i++) {
-            stateManager.CurrentProjectiles[i].GetComponent<CircleCollider2D>().enabled = true;
-        }
-    }*/
+    private void HitBoundary() {
+        StartCoroutine(DeleteProjectile(0));
+    }
 
-    protected virtual IEnumerator DeleteProjectile() {
-        yield return new WaitForSeconds(3);
+    protected virtual IEnumerator DeleteProjectile(int t) {
+        yield return new WaitForSeconds(t);
         stateManager.CurrentProjectiles.Remove(this.gameObject);
         stateManager.CurrentState.Exit();
         Destroy(this.gameObject);
