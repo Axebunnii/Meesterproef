@@ -14,7 +14,7 @@ public class UIManager : MonoBehaviour {
 
     public void ShowResults(Player player) {
         resultsScreen.SetActive(true);
-        winner.text = $"{player.gameObject.name} wins!!!";
+        winner.text = $"{player.gameObject.name} is the winner!!!";
     }
 
     public void ToMainMenu() {

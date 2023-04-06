@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour {
+    [SerializeField] StateManager stateManager;
     private Vector3 offset = new Vector2(4, 0);
     public enum CameraFocus {player1, player2, projectile};
     public CameraFocus currentFocus;
@@ -33,7 +34,14 @@ public class CameraController : MonoBehaviour {
     }
 
     private void FollowProjectile() {
-        focusProjectile = GameObject.FindGameObjectWithTag("Projectile");
+        focusProjectile = stateManager.CurrentProjectiles[0];
+
+        Vector3 newPosition = transform.position;
+        newPosition.x = Mathf.Lerp(transform.localPosition.x, focusProjectile.transform.localPosition.x, Time.deltaTime * 8);
+
+        transform.localPosition = newPosition;
+
+        /*focusProjectile = GameObject.FindGameObjectWithTag("Projectile");
         Vector3 position = transform.position;
 
         if (focusProjectile.transform.position.x > offset.x) {
@@ -44,6 +52,6 @@ public class CameraController : MonoBehaviour {
         else if (focusProjectile.transform.position.x > offset.x) {
             position.x = (focusProjectile.transform.position - offset).x;
             transform.position = position;
-        }
+        }*/
     }
 }

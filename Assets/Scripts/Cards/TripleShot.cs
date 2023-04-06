@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TripleShot : Card {
-    public TripleShot() : base("Triple Shot") { }
+    public TripleShot() : base("Triple Shot") {}
 
     public override void Use() {
         GameObject prefab = Resources.Load("Projectiles/Stone") as GameObject;
         ReplaceProjectile(prefab);
     }
 
-    /*protected override void ReplaceProjectile(GameObject prefab) {
+    protected override void ReplaceProjectile(GameObject prefab) {
+        stateManager = GameObject.Find("GameManager").GetComponent<StateManager>();
         GameObject ins;
         // Get the projectile that will be replaced
         currentProjectile = GameObject.FindGameObjectWithTag("Projectile");
@@ -23,9 +24,11 @@ public class TripleShot : Card {
             ins.GetComponent<SpringJoint2D>().connectedAnchor = new Vector2(0, 0);
             ins.GetComponent<SpringJoint2D>().distance = 0.005f;
             ins.GetComponent<StoneProjectile>().CanShoot = true;
+            stateManager.CurrentProjectiles.Add(ins);
         }
 
         // Remove current projectile from scene
+        stateManager.CurrentProjectiles.Remove(currentProjectile);
         Destroy(currentProjectile);
-    }*/
+    }
 }

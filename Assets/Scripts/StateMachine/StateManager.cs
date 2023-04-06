@@ -16,6 +16,19 @@ public class StateManager : MonoBehaviour {
         get { return currentState; }
     }
 
+
+    private bool playerWon = false;
+    public bool PlayerWon {
+        set { playerWon = value; }
+    }
+
+
+    protected List<GameObject> currentProjectiles = new List<GameObject>();
+    public List<GameObject> CurrentProjectiles {
+        set { currentProjectiles = value; }
+        get { return currentProjectiles; }
+    }
+
     void Start() {
         currentState = new StartState(this);
         RunCurrentState();
@@ -28,6 +41,13 @@ public class StateManager : MonoBehaviour {
     }
 
     public void ChangeState(State newState) {
+        if (playerWon) {
+            // call end state
+            //currentState = new End(this);
+            //currentState.Enter();
+            return;
+        }
+
         // Exit the last state and enter the new one
         Debug.Log($"current state is {currentState}");
         currentState = newState;

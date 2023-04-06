@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Player : MonoBehaviour {
     [SerializeField] private Slider lifePointSlider;
     [SerializeField] private Player otherPlayer;
+    [SerializeField] private StateManager stateManager;
     private UIManager uiManager;
 
     private int currentLP;
@@ -47,8 +48,10 @@ public class Player : MonoBehaviour {
     }
 
     private void CheckHealth() {
-        if (currentLP <= 0)
+        if (currentLP <= 0) {
+            stateManager.PlayerWon = true;
             // Show winner
             uiManager.ShowResults(otherPlayer);
+        }
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Card : MonoBehaviour{
     protected string cardName;
     protected GameObject currentProjectile;
-    protected List<GameObject> currentProjectiles;
+    protected StateManager stateManager;
 
     public string CardName {
         get { return cardName; }
@@ -20,6 +20,7 @@ public class Card : MonoBehaviour{
     }
 
     protected virtual void ReplaceProjectile(GameObject prefab) {
+        stateManager = GameObject.Find("GameManager").GetComponent<StateManager>();
         // Get the projectile that will be replaced
         currentProjectile = GameObject.FindGameObjectWithTag("Projectile");
         Rigidbody2D anchor = currentProjectile.GetComponent<SpringJoint2D>().connectedBody;
@@ -28,7 +29,12 @@ public class Card : MonoBehaviour{
         ins.GetComponent<SpringJoint2D>().connectedBody = anchor.GetComponent<Rigidbody2D>();
         ins.GetComponent<SpringJoint2D>().connectedAnchor = new Vector2(0, 0);
         ins.GetComponent<SpringJoint2D>().distance = 0.005f;
+        ins.GetComponent<Projectile>().CanShoot = true;
+        stateManager.CurrentProjectiles.Add(ins);
+
+        //for (int i = 0; i < stateManager.CurrentProjectiles.Count; i++) Debug.Log(stateManager.CurrentProjectiles[i]);
         // Remove current projectile from scene
+        stateManager.CurrentProjectiles.Remove(currentProjectile);
         Destroy(currentProjectile);
     }
 }
