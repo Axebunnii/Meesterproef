@@ -3204,8 +3204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 669e6406d0287bb4f86c2bbb654ee4d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  handUI: {fileID: 795632549}
-  deckCountText: {fileID: 1104643266}
+  uiManager: {fileID: 1374722261}
   discardCountText: {fileID: 484229777}
   turnDisplay: {fileID: 210463282}
   turnDisplayText: {fileID: 1146621940}
@@ -3221,8 +3220,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d5049f876e58af469700e1da641e60a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cardManager: {fileID: 1374722260}
   resultsScreen: {fileID: 636411172}
   winner: {fileID: 886615072}
+  handUI: {fileID: 795632549}
+  deckCountText: {fileID: 1104643266}
 --- !u!1 &1480206167
 GameObject:
   m_ObjectHideFlags: 0

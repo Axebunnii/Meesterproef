@@ -4,14 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class CardManager : MonoBehaviour {
-    [SerializeField] private GameObject handUI;
+    [SerializeField] UIManager uiManager;
     private Player currentPlayer;
     public Player CurrentPlayer {
         set { currentPlayer = value; }
+        get { return currentPlayer; }
     }
-
-    private int deckCount;
-    [SerializeField] private Text deckCountText;
 
     private int discardCount = 0;
     [SerializeField] private Text discardCountText;
@@ -31,14 +29,7 @@ public class CardManager : MonoBehaviour {
         set { endCardPhase = value; }
     }
 
-    private void Start() {
-        foreach (Transform handSlot in handUI.transform) {
-            handSlot.gameObject.SetActive(false);
-        }
-        UpdateHand();
-    }
-
-    public void UpdateHand() {
+    /*public void UpdateHand() {
         GameObject card;
         Sprite sprite;
         Vector3 position;
@@ -57,7 +48,7 @@ public class CardManager : MonoBehaviour {
         }
         deckCount = currentPlayer.Deck.Count;
         deckCountText.text = deckCount.ToString();
-    }
+    }*/
 
     public void TakeOpeningHand(Player player) {
         currentPlayer = player;
@@ -71,7 +62,7 @@ public class CardManager : MonoBehaviour {
         turnDisplay.GetComponent<SpriteRenderer>().color = new Color(0, 80, 255);
         // if player 2 turn
         // turnDisplay.GetComponent<SpriteRenderer>().color = new Color(255, 140, 0);
-        UpdateHand();
+        uiManager.UpdateHand();
     }
 
     public void DrawCard() {
@@ -84,7 +75,7 @@ public class CardManager : MonoBehaviour {
         currentPlayer.Deck.Remove(drawnCard);
         Debug.Log($"Draw {drawnCard}");
         Debug.Log($"Player has {currentPlayer.Hand.Count} cards in hand");
-        UpdateHand();
+        uiManager.UpdateHand();
     }
 
     public void PlayCard(int i) {
@@ -95,7 +86,7 @@ public class CardManager : MonoBehaviour {
 
         // Remove the card from players hand
         currentPlayer.Hand.Remove(card);
-        UpdateHand();
+        uiManager.UpdateHand();
     }
 
     public void DrawCardFromDeck() {

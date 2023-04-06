@@ -48,12 +48,10 @@ public class Player : MonoBehaviour {
     }
 
     public void CheckCondetions() {
-        if (currentLP <= 0) {
+        if (currentLP <= 0 || deck.Count < 1) {
             stateManager.PlayerWon = true;
             // Show winner
             uiManager.ShowResults(otherPlayer);
-        } else if (deck.Count < 1) {
-            uiManager.ShowResults(this);
         }
     }
 }

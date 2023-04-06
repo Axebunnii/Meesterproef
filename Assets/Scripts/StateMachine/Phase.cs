@@ -62,10 +62,10 @@ public class Phase {
     private IEnumerator WaitForCardDrawn(State state) {
         yield return new WaitUntil(() => cardManager.CardDrawn == true);
         // Draw card
-        if (player.Deck.Count < 1) {
+        if (player.Deck.Count == 0) {
             // Player losses game
-            player.CheckCondetions();  
-            yield return null;
+            player.CheckCondetions();
+            yield break;
         }
 
         cardManager.CurrentPlayer = player;
