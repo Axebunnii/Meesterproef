@@ -26,12 +26,6 @@ public class Projectile : MonoBehaviour {
     protected float velocity;
     protected float mass;
 
-    /*[SerializeField] protected StateManager.StateStatus state;
-    public StateManager.StateStatus State {
-        set { state = value; }
-        get { return state; }
-    }*/
-
     [SerializeField] protected bool assignAnchor = false;
 
     protected int damage;

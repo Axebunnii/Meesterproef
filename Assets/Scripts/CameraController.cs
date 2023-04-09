@@ -37,6 +37,8 @@ public class CameraController : MonoBehaviour {
     }
 
     private void FollowProjectile() {
+        if (stateManager.CurrentProjectiles[0] == null) return;
+
         focusProjectile = stateManager.CurrentProjectiles[0];
 
         Vector3 newPosition = transform.position;

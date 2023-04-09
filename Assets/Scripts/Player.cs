@@ -23,6 +23,12 @@ public class Player : MonoBehaviour {
         get { return deck; }
     }
 
+    private List<Card> discard = new List<Card> {};
+
+    public List<Card> Discard {
+        get { return discard; }
+    }
+
     // Cards in the players hand
     private List<Card> hand = new List<Card>();
     public List<Card> Hand {

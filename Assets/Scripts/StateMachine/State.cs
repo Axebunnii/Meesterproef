@@ -5,6 +5,8 @@ using UnityEngine;
 public class State {
     public string name;
     protected StateManager stateManager;
+    protected CardManager cardManager;
+    protected UIManager uiManager;
     protected Phase phase;
     protected Projectile projectile;
     protected MonoBehaviour monoBehaviour;

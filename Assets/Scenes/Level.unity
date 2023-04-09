@@ -3205,9 +3205,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiManager: {fileID: 1374722261}
-  discardCountText: {fileID: 484229777}
-  turnDisplay: {fileID: 210463282}
-  turnDisplayText: {fileID: 1146621940}
 --- !u!114 &1374722261
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3225,6 +3222,9 @@ MonoBehaviour:
   winner: {fileID: 886615072}
   handUI: {fileID: 795632549}
   deckCountText: {fileID: 1104643266}
+  turnDisplay: {fileID: 210463282}
+  turnDisplayText: {fileID: 1146621940}
+  discardCountText: {fileID: 484229777}
 --- !u!1 &1480206167
 GameObject:
   m_ObjectHideFlags: 0

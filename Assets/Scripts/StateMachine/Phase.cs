@@ -10,7 +10,6 @@ public class Phase {
     // 1. draw phase    2. card phase   3.shoot phase
     public enum PhaseStatus {draw, card, shoot};
     private Projectile projectile;
-    private Player player;
     private StateManager stateManager = GameObject.Find("GameManager").GetComponent<StateManager>();
     private CardManager cardManager = GameObject.Find("GameManager").GetComponent<CardManager>();
     private readonly Button deckButton = GameObject.Find("Deck").GetComponent<Button>();
@@ -27,8 +26,6 @@ public class Phase {
         foreach (Transform card in GameObject.Find("Hand").transform) {
             card.gameObject.GetComponent<EventTrigger>().enabled = false;
         }
-        if (stateManager.State == StateManager.StateStatus.player1) { player = GameObject.Find("Player 1").GetComponent<Player>(); }
-        else if (stateManager.State == StateManager.StateStatus.player2) { player = GameObject.Find("Player 2").GetComponent<Player>(); }
         projectile = GameObject.FindGameObjectWithTag("Projectile").GetComponent<Projectile>();
         projectile.CanShoot = false;
         // Wait till card has been drawn from the deck
@@ -56,19 +53,24 @@ public class Phase {
         }
         projectile = GameObject.FindGameObjectWithTag("Projectile").GetComponent<Projectile>();
         // Player is able to shoot
-        projectile.CanShoot = true;
+        for (int i = 0; i < stateManager.CurrentProjectiles.Count; i++) {
+            Projectile p = null;
+            p = stateManager.CurrentProjectiles[i].GetComponent<StoneProjectile>();
+            if (p == null)
+                p = stateManager.CurrentProjectiles[i].GetComponent<BombProjectile>();
+            p.CanShoot = true;
+        }
     }
 
     private IEnumerator WaitForCardDrawn(State state) {
         yield return new WaitUntil(() => cardManager.CardDrawn == true);
         // Draw card
-        if (player.Deck.Count == 0) {
+        if (cardManager.CurrentPlayer.Deck.Count == 0) {
             // Player losses game
-            player.CheckCondetions();
+            cardManager.CurrentPlayer.CheckCondetions();
             yield break;
         }
 
-        cardManager.CurrentPlayer = player;
         // Draw random card
         cardManager.DrawCard();
 
