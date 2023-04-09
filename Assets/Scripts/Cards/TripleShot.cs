@@ -14,7 +14,11 @@ public class TripleShot : Card {
         stateManager = GameObject.Find("GameManager").GetComponent<StateManager>();
         GameObject ins;
         // Get the projectile that will be replaced
-        currentProjectile = GameObject.FindGameObjectWithTag("Projectile");
+        currentProjectile = stateManager.CurrentProjectiles[0];
+        for (int i = 0; i < stateManager.CurrentProjectiles.Count; i++) {
+            Destroy(stateManager.CurrentProjectiles[i]);
+        }
+        stateManager.CurrentProjectiles.Clear();
         Rigidbody2D anchor = currentProjectile.GetComponent<SpringJoint2D>().connectedBody;
         // Replace current projecile with a three stone prefabs
         for (int i = 0; i < 3; i++) {
@@ -23,7 +27,6 @@ public class TripleShot : Card {
             ins.GetComponent<SpringJoint2D>().connectedBody = anchor.GetComponent<Rigidbody2D>();
             ins.GetComponent<SpringJoint2D>().connectedAnchor = new Vector2(0, 0);
             ins.GetComponent<SpringJoint2D>().distance = 0.005f;
-            ins.GetComponent<StoneProjectile>().CanShoot = true;
             stateManager.CurrentProjectiles.Add(ins);
         }
 

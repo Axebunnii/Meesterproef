@@ -3,10 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Player1Turn : State {
-    public Player1Turn(StateManager sm) : base("Player1Turn", sm) { stateManager = sm; }
+    public Player1Turn(StateManager sm) : base("Player1Turn", sm) {
+        stateManager = sm;
+        cardManager = GameObject.Find("GameManager").GetComponent<CardManager>();
+        uiManager = GameObject.Find("GameManager").GetComponent<UIManager>();
+    }
 
     public override void Enter() {
-        Debug.Log("start player 1 turn");
+        // Set the player in de cardmanager and update the ui to the right player
+        cardManager.CurrentPlayer = GameObject.Find("Player 1").GetComponent<Player>();
+        uiManager.UpdatePlayerUI();
+        // Set focus of camera
         cameraController.currentFocus = CameraController.CameraFocus.player1;
         currentPhase = Phase.PhaseStatus.draw;
         phase = new Phase();

@@ -13,12 +13,35 @@ public class UIManager : MonoBehaviour {
     private int deckCount;
     [SerializeField] private Text deckCountText;
 
+    [SerializeField] private Image turnDisplay;
+    [SerializeField] private Text turnDisplayText;
+
+    private int discardCount;
+    [SerializeField] private Text discardCountText;
+
     private void Start() {
         resultsScreen.SetActive(false);
 
         foreach (Transform handSlot in handUI.transform) {
             handSlot.gameObject.SetActive(false);
         }
+        UpdateHand();
+    }
+
+    public void UpdatePlayerUI() {
+        // Update turn display
+        // if player 1 turn
+        //turnDisplay.GetComponent<SpriteRenderer>().color = new Color(0, 80, 255);
+        // if player 2 turn
+        //turnDisplay.GetComponent<SpriteRenderer>().color = new Color(255, 140, 0);
+
+        // Update deck
+        deckCount = cardManager.CurrentPlayer.Deck.Count;
+        deckCountText.text = deckCount.ToString();
+        // Update discard
+        discardCount = cardManager.CurrentPlayer.Discard.Count;
+        discardCountText.text = discardCount.ToString();
+        // Update cards in hand
         UpdateHand();
     }
 
@@ -48,7 +71,5 @@ public class UIManager : MonoBehaviour {
             card.SetActive(true);
             card.GetComponent<Image>().sprite = sprite;
         }
-        deckCount = cardManager.CurrentPlayer.Deck.Count;
-        deckCountText.text = deckCount.ToString();
     }
 }
