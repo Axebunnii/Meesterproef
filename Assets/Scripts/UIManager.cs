@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour {
+    [SerializeField] StateManager stateManager;
     [SerializeField] CardManager cardManager;
     [SerializeField] private GameObject resultsScreen;
     [SerializeField] private Text winner;
@@ -31,9 +32,10 @@ public class UIManager : MonoBehaviour {
     public void UpdatePlayerUI() {
         // Update turn display
         // if player 1 turn
-        //turnDisplay.GetComponent<SpriteRenderer>().color = new Color(0, 80, 255);
+        turnDisplay.color = new Color(0, 0, 255);
         // if player 2 turn
-        //turnDisplay.GetComponent<SpriteRenderer>().color = new Color(255, 140, 0);
+        //turnDisplay.color = new Color(255, 140, 0);
+        turnDisplayText.text = $"Turn {stateManager.TurnCount.ToString()}";
 
         // Update deck
         deckCount = cardManager.CurrentPlayer.Deck.Count;

@@ -23,10 +23,16 @@ public class StateManager : MonoBehaviour {
     }
 
 
-    protected List<GameObject> currentProjectiles = new List<GameObject>();
+    private List<GameObject> currentProjectiles = new List<GameObject>();
     public List<GameObject> CurrentProjectiles {
         set { currentProjectiles = value; }
         get { return currentProjectiles; }
+    }
+
+    private int turnCount = 1;
+    public int TurnCount {
+        get { return turnCount; }
+        set { turnCount = value; }
     }
 
     void Start() {
@@ -35,7 +41,6 @@ public class StateManager : MonoBehaviour {
     }
 
     private void RunCurrentState() {
-        Debug.Log("run state");
         // Enter current state if not null
         currentState?.Enter();
     }
@@ -49,7 +54,6 @@ public class StateManager : MonoBehaviour {
         }
 
         // Exit the last state and enter the new one
-        Debug.Log($"current state is {currentState}");
         currentState = newState;
         currentState.Enter();
     }

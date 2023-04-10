@@ -82,7 +82,6 @@ public class Phase {
     private IEnumerator WaitForEndCardPhase(State state) {
         yield return new WaitUntil(() => cardManager.EndCardPhase == true);
         state.CurrentPhase = PhaseStatus.shoot;
-        Debug.Log("Ending card phase");
         // Activate card effect
 
         // Delete card from hand
