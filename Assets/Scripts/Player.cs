@@ -49,7 +49,6 @@ public class Player : MonoBehaviour {
     }
 
     private void UpdateHealthBar() {
-        Debug.Log("Update healthbar");
         lifePointSlider.value = currentLP;
     }
 

@@ -22,7 +22,6 @@ public class TripleShot : Card {
         Rigidbody2D anchor = currentProjectile.GetComponent<SpringJoint2D>().connectedBody;
         // Replace current projecile with a three stone prefabs
         for (int i = 0; i < 3; i++) {
-            Debug.Log("Spawn projectile");
             ins = Instantiate(prefab, currentProjectile.transform.position, Quaternion.identity);
             ins.GetComponent<SpringJoint2D>().connectedBody = anchor.GetComponent<Rigidbody2D>();
             ins.GetComponent<SpringJoint2D>().connectedAnchor = new Vector2(0, 0);

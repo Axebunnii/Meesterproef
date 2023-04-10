@@ -35,7 +35,6 @@ public class Card : MonoBehaviour{
         ins.GetComponent<SpringJoint2D>().distance = 0.005f;
         stateManager.CurrentProjectiles.Add(ins);
 
-        //for (int i = 0; i < stateManager.CurrentProjectiles.Count; i++) Debug.Log(stateManager.CurrentProjectiles[i]);
         // Remove current projectile from scene
         stateManager.CurrentProjectiles.Remove(currentProjectile);
     }

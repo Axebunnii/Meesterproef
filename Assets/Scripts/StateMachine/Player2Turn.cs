@@ -31,9 +31,8 @@ public class Player2Turn : State {
     }
 
     public override void Exit() {
-        Debug.Log("exit player 2 turn, enter player 1 turn");
-        Debug.Log(stateManager.CurrentProjectiles.Count);
         if (stateManager.CurrentProjectiles.Count == 0)
+            stateManager.TurnCount += 1;
             stateManager.ChangeState(new Player1Turn(stateManager));
     }
 }

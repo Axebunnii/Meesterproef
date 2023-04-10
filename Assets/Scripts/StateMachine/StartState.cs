@@ -10,7 +10,6 @@ public class StartState : State {
     public StartState(StateManager statemanager) : base("StartState", statemanager) { stateManager = statemanager; }
 
     public override void Enter() {
-        Debug.Log("Start level");
         cardManager = GameObject.Find("GameManager").GetComponent<CardManager>();
         player1 = GameObject.Find("Player 1").GetComponent<Player>();
         player2 = GameObject.Find("Player 2").GetComponent<Player>();

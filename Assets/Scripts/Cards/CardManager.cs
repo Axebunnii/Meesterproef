@@ -31,20 +31,16 @@ public class CardManager : MonoBehaviour {
     }
 
     public void DrawCard() {
-        Debug.Log($"Deck has {currentPlayer.Deck.Count} cards");
         // Get a random number thats in between 0 and the deck count
         int randomNumber = Random.Range(0, currentPlayer.Deck.Count - 1);
         Card drawnCard = currentPlayer.Deck[randomNumber];
         // Add the drawn card to the players' hand
         currentPlayer.Hand.Add(drawnCard);
         currentPlayer.Deck.Remove(drawnCard);
-        Debug.Log($"Draw {drawnCard}");
-        Debug.Log($"Player has {currentPlayer.Hand.Count} cards in hand");
         uiManager.UpdatePlayerUI();
     }
 
     public void PlayCard(int i) {
-        Debug.Log(i);
         Card card = currentPlayer.Hand[i];
         // Activate card effect
         card.Use();
@@ -61,9 +57,5 @@ public class CardManager : MonoBehaviour {
 
     public void EndCardPhasePressed() {
         endCardPhase = true;
-    }
-
-    private void PlaceInDiscard() {
-
     }
 }

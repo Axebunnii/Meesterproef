@@ -31,8 +31,13 @@ public class Player1Turn : State {
     }
 
     public override void Exit() {
-        Debug.Log("exit player 1 turn, enter player 2 turn");
-        Debug.Log(stateManager.CurrentProjectiles.Count);
+        // Discard until player has 6 cards in hand
+        /*if (cardManager.CurrentPlayer.Hand.Count > 6) {
+            
+            Exit();
+            return;
+        }*/
+
         if (stateManager.CurrentProjectiles.Count == 0)
             stateManager.ChangeState(new Player2Turn(stateManager));
     }

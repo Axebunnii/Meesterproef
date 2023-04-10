@@ -37,7 +37,7 @@ public class CameraController : MonoBehaviour {
     }
 
     private void FollowProjectile() {
-        if (stateManager.CurrentProjectiles[0] == null) return;
+        if (stateManager.CurrentProjectiles.Count == 0) return;
 
         focusProjectile = stateManager.CurrentProjectiles[0];
 
